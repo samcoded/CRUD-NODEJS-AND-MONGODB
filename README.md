@@ -29,6 +29,8 @@
 
 #### Retrieves all users present in the database
 
+##### Example Response
+
 {
 "message": "Entries retrieved",
 "data": [
