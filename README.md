@@ -8,22 +8,26 @@
 
 ##### Example Request Body
 
+```json
 {
-"name": "John Doe",
-"email": "test@email.com",
-"country": "India"
+  "name": "John Doe",
+  "email": "test@email.com",
+  "country": "India"
 }
+```
 
 ##### Example Response
 
+```json
 {
-"message": "Successfully created entry",
-"data": {
-"name": "John Doe",
-"email": "test@email.com",
-"country": "India"
+  "message": "Successfully created entry",
+  "data": {
+    "name": "John Doe",
+    "email": "test@email.com",
+    "country": "India"
+  }
 }
-}
+```
 
 ### [GET] https://crud-nodejs-codedsam.herokuapp.com/
 
@@ -31,25 +35,27 @@
 
 ##### Example Response
 
+```json
 {
-"message": "Entries retrieved",
-"data": [
-{
-"_id": "6098294185be960015bd5473",
-"name": "Samuel Anozie",
-"email": "codedsam@zuri.com",
-"country": "Nigeria",
-"__v": 0
-},
-{
-"_id": "60982a09eee44100155657bb",
-"name": "Xhizu Anozie",
-"email": "Xhizu@zuri.com",
-"country": "China",
-"__v": 0
+  "message": "Entries retrieved",
+  "data": [
+    {
+      "_id": "6098294185be960015bd5473",
+      "name": "Samuel Anozie",
+      "email": "codedsam@zuri.com",
+      "country": "Nigeria",
+      "__v": 0
+    },
+    {
+      "_id": "60982a09eee44100155657bb",
+      "name": "Xhizu Anozie",
+      "email": "Xhizu@zuri.com",
+      "country": "China",
+      "__v": 0
+    }
+  ]
 }
-]
-}
+```
 
 ### [GET] https://crud-nodejs-codedsam.herokuapp.com/{ID}
 
@@ -57,16 +63,18 @@
 
 ##### Example Response
 
+```json
 {
-"message": "Entry retrieved",
-"data": {
-"\_id": "609829f2eee44100155657ba",
-"name": "Samuel Anozie",
-"email": "codedsam@zuri.com",
-"country": "Nigeria",
-"\_\_v": 0
+  "message": "Entry retrieved",
+  "data": {
+    "_id": "609829f2eee44100155657ba",
+    "name": "Samuel Anozie",
+    "email": "codedsam@zuri.com",
+    "country": "Nigeria",
+    "__v": 0
+  }
 }
-}
+```
 
 ### [PUT] https://crud-nodejs-codedsam.herokuapp.com/{ID}
 
@@ -74,22 +82,26 @@
 
 ##### Example Request Body
 
+```json
 {
-"name": "John Doe",
-"email": "test@email.com",
-"country": "India"
+  "name": "John Doe",
+  "email": "test@email.com",
+  "country": "India"
 }
+```
 
 ##### Example Response
 
+```json
 {
-"message": "Successfully updated entry",
-"data": {
-"name": "John Doe",
-"email": "test@email.com",
-"country": "India"
+  "message": "Successfully updated entry",
+  "data": {
+    "name": "John Doe",
+    "email": "test@email.com",
+    "country": "India"
+  }
 }
-}
+```
 
 ### [DELETE] https://crud-nodejs-codedsam.herokuapp.com/{ID}
 
@@ -97,7 +109,9 @@
 
 ##### Example Response
 
+```json
 {
-"message": "Entry deleted successfully.",
-"data": {}
+  "message": "Entry deleted successfully.",
+  "data": {}
 }
+```

@@ -1,4 +1,6 @@
+const mongoose = require("mongoose");
 const EntrySchema = require("./dbModel");
+const Joi = require("joi"); //validation
 
 const getAll = async (req, res) => {
   try {
@@ -56,6 +58,24 @@ const createEntry = async (req, res) => {
       data: {},
     });
   }
+
+  //validate input
+  const entryschema = Joi.object().keys({
+    name: Joi.string().required(),
+    email: Joi.string().email().required(),
+    country: Joi.string().required(),
+  });
+
+  try {
+    await entryschema.validateAsync(req.body);
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+    });
+  }
+
+  //save entry to database
   try {
     const entry = { name, email, country };
     const save = await EntrySchema.create(entry);
@@ -70,9 +90,26 @@ const createEntry = async (req, res) => {
     });
   }
 };
+
 const updateEntry = async (req, res) => {
   const { id } = req.params;
-  const { name, email, country } = req.body;
+  const updatedEntry = req.body;
+
+  //validate input
+  const entryschema = Joi.object().keys({
+    name: Joi.string(),
+    email: Joi.string().email(),
+    country: Joi.string(),
+  });
+
+  try {
+    await entryschema.validateAsync(req.body);
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+    });
+  }
 
   //check if ID is a valid mongodb ID
   if (!mongoose.Types.ObjectId.isValid(id))
@@ -80,17 +117,18 @@ const updateEntry = async (req, res) => {
       message: "Invalid ID",
       data: {},
     });
+
   //check ID is in database
   const entryExist = await EntrySchema.findById(id);
-  if (!entryExist) {
+  if (!entryExist)
     return res.status(400).json({
       message: "Invalid ID",
       data: {},
     });
-  }
+
+  //update database
   try {
-    const entry = { name, email, country, _id: id };
-    const update = await EntrySchema.findByIdAndUpdate(id, entry, {
+    const update = await EntrySchema.findByIdAndUpdate(id, updatedEntry, {
       new: true,
     });
     res.status(200).json({
