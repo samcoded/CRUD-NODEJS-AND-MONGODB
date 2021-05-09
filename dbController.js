@@ -16,8 +16,15 @@ const getAll = async (req, res) => {
 };
 const getUser = async (req, res) => {
   const { id } = req.params;
+
   try {
     const user = await UserSchema.findById(id);
+    if (!user) {
+      return res.status(400).json({
+        message: "Invalid ID",
+        data: {},
+      });
+    }
     res.status(200).json({
       message: "User retrieved",
       data: user,
@@ -33,7 +40,7 @@ const getUser = async (req, res) => {
 const createUser = async (req, res) => {
   const { name, email, country } = req.body;
 
-  oldUser = await UserSchema.findOne({ email });
+  const oldUser = await UserSchema.findOne({ email });
   if (oldUser) {
     return res.status(400).json({
       message: "Email already exist",
@@ -57,6 +64,14 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { id } = req.params;
   const { name, email, country } = req.body;
+
+  const userExist = await UserSchema.findById(id);
+  if (!userExist) {
+    return res.status(400).json({
+      message: "Invalid ID",
+      data: {},
+    });
+  }
   try {
     const user = { name, email, country, _id: id };
     await UserSchema.findByIdAndUpdate(id, user, { new: true });
@@ -74,6 +89,14 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
+
+  const userExist = await UserSchema.findById(id);
+  if (!userExist) {
+    return res.status(400).json({
+      message: "Invalid ID",
+      data: {},
+    });
+  }
   try {
     await UserSchema.findByIdAndRemove(id);
     res.status(200).json({
