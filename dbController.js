@@ -7,7 +7,7 @@ const getAll = async (req, res) => {
     const entries = await EntrySchema.find();
     res.status(200).json({
       message: "Entries retrieved",
-      data: entries,
+      data: { entries },
     });
   } catch (error) {
     res.status(500).json({
