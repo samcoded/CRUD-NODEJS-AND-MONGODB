@@ -35,7 +35,7 @@ const createUser = async (req, res) => {
 
   oldUser = await UserSchema.findOne({ email });
   if (oldUser) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "Email already exist",
       data: {},
     });
@@ -45,7 +45,7 @@ const createUser = async (req, res) => {
     await UserSchema.create(user);
     res.status(200).json({
       message: "Successfully created user",
-      data: { user },
+      data: user,
     });
   } catch (error) {
     res.status(500).json({
