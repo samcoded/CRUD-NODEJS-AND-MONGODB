@@ -27,7 +27,7 @@
 
 ### [GET] https://crud-nodejs-codedsam.herokuapp.com/
 
-#### Retrieves all users present in the database
+#### Retrieves all entries present in the database
 
 ##### Example Response
 
@@ -53,7 +53,7 @@
 
 ### [GET] https://crud-nodejs-codedsam.herokuapp.com/{ID}
 
-#### Retrieves user details for a specific ID
+#### Retrieves entry details for a specific ID
 
 ##### Example Response
 
@@ -70,7 +70,7 @@
 
 ### [PUT] https://crud-nodejs-codedsam.herokuapp.com/{ID}
 
-#### Updates user details for a specific ID
+#### Updates entry details for a specific ID
 
 ##### Example Request Body
 
@@ -93,7 +93,7 @@
 
 ### [DELETE] https://crud-nodejs-codedsam.herokuapp.com/{ID}
 
-#### Deletes user for a specific ID
+#### Deletes entry for a specific ID
 
 ##### Example Response
 

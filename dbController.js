@@ -1,11 +1,11 @@
-const UserSchema = require("./dbModel");
+const EntrySchema = require("./dbModel");
 
 const getAll = async (req, res) => {
   try {
-    const users = await UserSchema.find();
+    const entries = await EntrySchema.find();
     res.status(200).json({
       message: "Entries retrieved",
-      data: users,
+      data: entries,
     });
   } catch (error) {
     res.status(500).json({
@@ -14,12 +14,20 @@ const getAll = async (req, res) => {
     });
   }
 };
-const getUser = async (req, res) => {
+const getEntry = async (req, res) => {
   const { id } = req.params;
 
+  //check if ID is a valid mongodb ID
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(400).json({
+      message: "Invalid ID",
+      data: {},
+    });
+
   try {
-    const user = await UserSchema.findById(id);
-    if (!user) {
+    const entry = await EntrySchema.findById(id);
+    //check ID is in database
+    if (!entry) {
       return res.status(400).json({
         message: "Invalid ID",
         data: {},
@@ -27,7 +35,7 @@ const getUser = async (req, res) => {
     }
     res.status(200).json({
       message: "Entry retrieved",
-      data: user,
+      data: entry,
     });
   } catch (error) {
     res.status(500).json({
@@ -37,19 +45,20 @@ const getUser = async (req, res) => {
   }
 };
 
-const createUser = async (req, res) => {
+const createEntry = async (req, res) => {
   const { name, email, country } = req.body;
 
-  const oldUser = await UserSchema.findOne({ email });
-  if (oldUser) {
+  //check if email already exist
+  const oldEntry = await EntrySchema.findOne({ email });
+  if (oldEntry) {
     return res.status(400).json({
       message: "Email already exist",
       data: {},
     });
   }
   try {
-    const user = { name, email, country };
-    const save = await UserSchema.create(user);
+    const entry = { name, email, country };
+    const save = await EntrySchema.create(entry);
     res.status(200).json({
       message: "Successfully created entry",
       data: save,
@@ -61,20 +70,29 @@ const createUser = async (req, res) => {
     });
   }
 };
-const updateUser = async (req, res) => {
+const updateEntry = async (req, res) => {
   const { id } = req.params;
   const { name, email, country } = req.body;
 
-  const userExist = await UserSchema.findById(id);
-  if (!userExist) {
+  //check if ID is a valid mongodb ID
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(400).json({
+      message: "Invalid ID",
+      data: {},
+    });
+  //check ID is in database
+  const entryExist = await EntrySchema.findById(id);
+  if (!entryExist) {
     return res.status(400).json({
       message: "Invalid ID",
       data: {},
     });
   }
   try {
-    const user = { name, email, country, _id: id };
-    const update = await UserSchema.findByIdAndUpdate(id, user, { new: true });
+    const entry = { name, email, country, _id: id };
+    const update = await EntrySchema.findByIdAndUpdate(id, entry, {
+      new: true,
+    });
     res.status(200).json({
       message: "Succcessfully updated entry",
       data: update,
@@ -87,18 +105,26 @@ const updateUser = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
+const deleteEntry = async (req, res) => {
   const { id } = req.params;
 
-  const userExist = await UserSchema.findById(id);
-  if (!userExist) {
+  //check if ID is a valid mongodb ID
+  if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(400).json({
       message: "Invalid ID",
       data: {},
     });
-  }
+
+  //check ID is in database
+  const entryExist = await EntrySchema.findById(id);
+  if (!entryExist)
+    return res.status(400).json({
+      message: "Invalid ID",
+      data: {},
+    });
+
   try {
-    await UserSchema.findByIdAndRemove(id);
+    await EntrySchema.findByIdAndRemove(id);
     res.status(200).json({
       message: "Entry deleted successfully.",
       data: {},
@@ -111,5 +137,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getUser, createUser, updateUser, deleteUser };
-// module.exports = { getAll, createUser, deleteUser };
+module.exports = { getAll, getEntry, createEntry, updateEntry, deleteEntry };

@@ -11,18 +11,18 @@ app.use(express.json());
 //LOAD CONTROLLERS
 const {
   getAll,
-  getUser,
-  createUser,
-  updateUser,
-  deleteUser,
+  getEntry,
+  createEntry,
+  updateEntry,
+  deleteEntry,
 } = require("./dbController");
 
 //API ROUTES
-app.post("/", createUser);
-app.get("/:id", getUser);
+app.post("/", createEntry);
+app.get("/:id", getEntry);
 app.get("/", getAll);
-app.put("/:id", updateUser);
-app.delete("/:id", deleteUser);
+app.put("/:id", updateEntry);
+app.delete("/:id", deleteEntry);
 
 //CONNECT DATABASE
 const CONNECTION_URL = process.env.MONGOURL;
