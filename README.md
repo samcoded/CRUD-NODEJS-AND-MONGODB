@@ -1,5 +1,7 @@
 # NODEJS CRUD APP WITH MONGODB
 
+## API URL: https://crud-nodejs-codedsam.herokuapp.com/
+
 ### [POST] https://crud-nodejs-codedsam.herokuapp.com/
 
 #### Adds new entry to database
@@ -50,6 +52,19 @@
 ### [GET] https://crud-nodejs-codedsam.herokuapp.com/{ID}
 
 #### Retrieves user details for a specific ID
+
+##### Example Response
+
+{
+"message": "Entry retrieved",
+"data": {
+"\_id": "609829f2eee44100155657ba",
+"name": "Samuel Anozie",
+"email": "codedsam@zuri.com",
+"country": "Nigeria",
+"\_\_v": 0
+}
+}
 
 ### [PUT] https://crud-nodejs-codedsam.herokuapp.com/{ID}
 
