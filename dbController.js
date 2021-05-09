@@ -5,7 +5,7 @@ const getAll = async (req, res) => {
     const users = await UserSchema.find();
     res.status(200).json({
       message: "Users retrieved",
-      data: { users },
+      data: users,
     });
   } catch (error) {
     res.status(500).json({
@@ -17,10 +17,10 @@ const getAll = async (req, res) => {
 const getUser = async (req, res) => {
   const { id } = req.params;
   try {
-    const users = await UserSchema.findById(id);
+    const user = await UserSchema.findById(id);
     res.status(200).json({
       message: "User retrieved",
-      data: { users },
+      data: user,
     });
   } catch (error) {
     res.status(500).json({
@@ -62,7 +62,7 @@ const updateUser = async (req, res) => {
     await UserSchema.findByIdAndUpdate(id, user, { new: true });
     res.status(200).json({
       message: "Succcessfully updated User",
-      data: { user },
+      data: user,
     });
   } catch (error) {
     res.status(500).json({
