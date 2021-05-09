@@ -49,10 +49,10 @@ const createUser = async (req, res) => {
   }
   try {
     const user = { name, email, country };
-    await UserSchema.create(user);
+    const save = await UserSchema.create(user);
     res.status(200).json({
       message: "Successfully created entry",
-      data: user,
+      data: save,
     });
   } catch (error) {
     res.status(500).json({
