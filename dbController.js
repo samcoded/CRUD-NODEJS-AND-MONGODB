@@ -161,6 +161,7 @@ const deleteEntry = async (req, res) => {
       data: {},
     });
 
+  //delete Entry
   try {
     await EntrySchema.findByIdAndRemove(id);
     res.status(200).json({
