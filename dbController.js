@@ -4,7 +4,7 @@ const getAll = async (req, res) => {
   try {
     const users = await UserSchema.find();
     res.status(200).json({
-      message: "Users retrieved",
+      message: "Entries retrieved",
       data: users,
     });
   } catch (error) {
@@ -26,7 +26,7 @@ const getUser = async (req, res) => {
       });
     }
     res.status(200).json({
-      message: "User retrieved",
+      message: "Entry retrieved",
       data: user,
     });
   } catch (error) {
@@ -51,7 +51,7 @@ const createUser = async (req, res) => {
     const user = { name, email, country };
     await UserSchema.create(user);
     res.status(200).json({
-      message: "Successfully created user",
+      message: "Successfully created entry",
       data: user,
     });
   } catch (error) {
@@ -74,10 +74,10 @@ const updateUser = async (req, res) => {
   }
   try {
     const user = { name, email, country, _id: id };
-    await UserSchema.findByIdAndUpdate(id, user, { new: true });
+    const update = await UserSchema.findByIdAndUpdate(id, user, { new: true });
     res.status(200).json({
-      message: "Succcessfully updated User",
-      data: user,
+      message: "Succcessfully updated entry",
+      data: update,
     });
   } catch (error) {
     res.status(500).json({
@@ -100,7 +100,7 @@ const deleteUser = async (req, res) => {
   try {
     await UserSchema.findByIdAndRemove(id);
     res.status(200).json({
-      message: "User deleted successfully.",
+      message: "Entry deleted successfully.",
       data: {},
     });
   } catch (error) {
