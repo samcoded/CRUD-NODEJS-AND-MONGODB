@@ -38,22 +38,24 @@
 ```json
 {
   "message": "Entries retrieved",
-  "data": [
-    {
-      "_id": "6098294185be960015bd5473",
-      "name": "Samuel Anozie",
-      "email": "codedsam@zuri.com",
-      "country": "Nigeria",
-      "__v": 0
-    },
-    {
-      "_id": "60982a09eee44100155657bb",
-      "name": "Xhizu Anozie",
-      "email": "Xhizu@zuri.com",
-      "country": "China",
-      "__v": 0
-    }
-  ]
+  "data": {
+    "entries": [
+      {
+        "_id": "6098294185be960015bd5473",
+        "name": "Samuel Anozie",
+        "email": "codedsam@zuri.com",
+        "country": "Nigeria",
+        "__v": 0
+      },
+      {
+        "_id": "60982a09eee44100155657bb",
+        "name": "Xhizu Anozie",
+        "email": "Xhizu@zuri.com",
+        "country": "China",
+        "__v": 0
+      }
+    ]
+  }
 }
 ```
 
